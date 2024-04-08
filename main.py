@@ -8,7 +8,7 @@ destination_token = os.getenv('your_destination_token')
 
 # Source and destination repository information
 source_repo_name = 'repo_name'
-destination_repo_name = 'repo-name'
+destination_repo_name = 'repo_name'
 source_username = 'username'
 destination_username = 'username'
 
