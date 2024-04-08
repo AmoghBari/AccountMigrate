@@ -19,14 +19,14 @@ jobs:
           git config --global user.name "Github Username"
 
       - name: Clone Destination Repository
-        run: git clone https://github.com/your-destination-account/your-destination-repo.git  # Replace the following URL with the destination repository URL
+        run: git clone https://github.com/destination-account/destination-repo.git  # Replace the following URL with the destination repository URL
         env:
           DESTINATION_TOKEN: ${{ secrets.DESTINATION_TOKEN }}  # Token of the destination account
 
       - name: Copy Files
         run: |
-          cp -r ./* your-destination-repo/
-          cd your-destination-repo
+          cp -r ./* destination-repo/
+          cd destination-repo
           git add .
           git commit -m "Migrate files"
           git push origin main
