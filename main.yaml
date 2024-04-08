@@ -37,6 +37,6 @@ jobs:
       - name: Migrate Secrets
         run: |
           echo "Migrating secrets..."
-          echo "${{ secrets.SOURCE_SECRET }}" >> your-destination-repo/.env  # Example of migrating a secret to a .env file
+          echo "${{ secrets.SOURCE_SECRET }}" >> your-destination-repo/.env  # Migrating secret to a .env file
         env:
           SOURCE_SECRET: ${{ secrets.SOURCE_SECRET }}    #  SOURCE_SECRET-Name of all the Secrets of the source repository
