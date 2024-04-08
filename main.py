@@ -35,14 +35,14 @@ def push_to_new_repo(new_repo_url):
 # Main function
 def main():
     # Source repository details
-    source_owner = 'source_owner_username'
-    source_repo = 'source_repo_name'
-    source_token = 'source_account_access_token'
+    source_owner = 'source_username'
+    source_repo = 'repo_name'
+    source_token = 'source_token'
 
     # Destination repository details
-    dest_owner = 'destination_owner_username'
-    dest_repo = 'destination_repo_name'
-    dest_token = 'destination_account_access_token'
+    dest_owner = 'destination_username'
+    dest_repo = 'repo_name'
+    dest_token = 'destination_token'
 
     # Get source repository details
     source_repo_details = get_repo_details(source_owner, source_repo, source_token)
