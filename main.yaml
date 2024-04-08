@@ -3,7 +3,7 @@ name: Migrate Repository
 on:
   push:
     branches:
-      - main  # Adjust this based on your branch name
+      - main  # Replace with your desired branch name
 
 jobs:
   migrate:
@@ -15,30 +15,28 @@ jobs:
 
       - name: Set Up Git
         run: |
-          git config --global user.email "your-email@example.com"
-          git config --global user.name "kshrikant7"
+          git config --global user.email "your-email@xyz.com"
+          git config --global user.name "Github Username"
 
       - name: Clone Destination Repository
-        run: git clone https://github.com/nanuchavan037/ETL_GroupTask.git
+        run: git clone https://github.com/your-destination-account/your-destination-repo.git  # Replace the following URL with the destination repository URL
         env:
-          DESTINATION_TOKEN: ${{ secrets.DESTINATION_TOKEN }}
+          DESTINATION_TOKEN: ${{ secrets.DESTINATION_TOKEN }}  # Token of the destination account
 
       - name: Copy Files
         run: |
-          cp -r ./* nanuchavan037/
-          cd ETL_GroupTask
+          cp -r ./* your-destination-repo/
+          cd your-destination-repo
           git add .
           git commit -m "Migrate files"
           git push origin main
         env:
           DESTINATION_TOKEN: ${{ secrets.DESTINATION_TOKEN }}
 
-      # Additional steps for migrating secrets
+      # Migrate Secrets
       - name: Migrate Secrets
         run: |
           echo "Migrating secrets..."
-          # Example of migrating a secret to a file
-          echo "$YOUR_SECRET" >> destination-repo/.env
-          # You can add similar lines for each secret you want to migrate
+          echo "${{ secrets.SOURCE_SECRET }}" >> your-destination-repo/.env  # Example of migrating a secret to a .env file
         env:
-          YOUR_SECRET: ${{ secrets.YOUR_SOURCE_SECRET }}
+          SOURCE_SECRET: ${{ secrets.SOURCE_SECRET }}    #  All the Secrets from the source repository
