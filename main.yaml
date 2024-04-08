@@ -1,0 +1,44 @@
+name: Migrate Repository
+
+on:
+  push:
+    branches:
+      - main  # Adjust this based on your branch name
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Source Repository
+        uses: actions/checkout@v2
+
+      - name: Set Up Git
+        run: |
+          git config --global user.email "your-email@example.com"
+          git config --global user.name "kshrikant7"
+
+      - name: Clone Destination Repository
+        run: git clone https://github.com/nanuchavan037/ETL_GroupTask.git
+        env:
+          DESTINATION_TOKEN: ${{ secrets.DESTINATION_TOKEN }}
+
+      - name: Copy Files
+        run: |
+          cp -r ./* nanuchavan037/
+          cd ETL_GroupTask
+          git add .
+          git commit -m "Migrate files"
+          git push origin main
+        env:
+          DESTINATION_TOKEN: ${{ secrets.DESTINATION_TOKEN }}
+
+      # Additional steps for migrating secrets
+      - name: Migrate Secrets
+        run: |
+          echo "Migrating secrets..."
+          # Example of migrating a secret to a file
+          echo "$YOUR_SECRET" >> destination-repo/.env
+          # You can add similar lines for each secret you want to migrate
+        env:
+          YOUR_SECRET: ${{ secrets.YOUR_SOURCE_SECRET }}
