@@ -3,14 +3,14 @@ import json
 import os
 
 # GitHub API access tokens for source and destination accounts
-source_token = os.getenv('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')
-destination_token = os.getenv('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')
+source_token = os.getenv('your_source_token')
+destination_token = os.getenv('your_destination_token')
 
 # Source and destination repository information
-source_repo_name = 'ETL_GroupTask'
-destination_repo_name = 'ETL_GroupTask'
-source_username = 'kshrikant7'
-destination_username = 'nanuchavan037'
+source_repo_name = 'repo_name'
+destination_repo_name = 'repo-name'
+source_username = 'username'
+destination_username = 'username'
 
 # Headers for GitHub API requests
 source_headers = {
