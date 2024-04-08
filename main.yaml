@@ -3,7 +3,7 @@ name: Migrate Repository
 on:
   push:
     branches:
-      - main  # Replace with your desired branch name
+      - main  # Replace with the branch name
 
 jobs:
   migrate:
@@ -15,13 +15,13 @@ jobs:
 
       - name: Set Up Git
         run: |
-          git config --global user.email "your-email@xyz.com"
-          git config --global user.name "Github Username"
+          git config --global user.email "your_email_id@xyz.com"
+          git config --global user.name "Your_Github_Username"
 
       - name: Clone Destination Repository
         run: git clone https://github.com/destination-account/destination-repo.git  # Replace the following URL with the destination repository URL
         env:
-          DESTINATION_TOKEN: ${{ secrets.DESTINATION_TOKEN }}  # Token of the destination account
+          DESTINATION_TOKEN: ${{ secrets.DESTINATION_TOKEN }}  # DESTINATION_TOKEN-Token of the destination account
 
       - name: Copy Files
         run: |
