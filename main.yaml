@@ -21,7 +21,7 @@ jobs:
       - name: Clone Destination Repository
         run: git clone https://github.com/destination-account/destination-repo.git  # Replace the following URL with the destination repository URL
         env:
-          DESTINATION_TOKEN: ${{ secrets.DESTINATION_TOKEN }}  # DESTINATION_TOKEN-Token of the destination account
+          DESTINATION_TOKEN: ${{ secrets.DESTINATION_TOKEN }}  # DESTINATION_TOKEN-Github Token of the destination account
 
       - name: Copy Files
         run: |
@@ -39,4 +39,4 @@ jobs:
           echo "Migrating secrets..."
           echo "${{ secrets.SOURCE_SECRET }}" >> your-destination-repo/.env  # Example of migrating a secret to a .env file
         env:
-          SOURCE_SECRET: ${{ secrets.SOURCE_SECRET }}    #  SOURCE_SECRET-Name of all the Secrets from the source repository
+          SOURCE_SECRET: ${{ secrets.SOURCE_SECRET }}    #  SOURCE_SECRET-Name of all the Secrets of the source repository
