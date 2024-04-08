@@ -8,8 +8,7 @@ Instructions for migrate.yml file
 
 
 
-
-
+<br> <br>
 Python Script
 1. Regarding the Python Script The GitHub API does not allow the migration of Secrets and if we try to convert them into json         format and then migrate then there is an error showing that the format of the secrets is not correct.
 2. Also if we try to convert the Secrets into Envirnoment Variables and then migrate it then there is an error showing that the       secrets were not found as they cannot read them.
