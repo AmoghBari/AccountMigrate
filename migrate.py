@@ -34,6 +34,29 @@ def push_to_new_repo(new_repo_url):
     subprocess.run(['git', 'remote', 'set-url', 'origin', new_repo_url])
     subprocess.run(['git', 'push', 'origin', '--all'])
 
+def get_repository_secrets(owner, repo, token):
+    headers = {
+        'Authorization': f'token {token}',
+        'Accept': 'application/vnd.github.v3+json'
+    }
+    url = f'https://api.github.com/repos/{owner}/{repo}/actions/secrets'
+    response = requests.get(url, headers=headers)
+    return response.json()
+
+# Function to create or update repository secrets
+def create_or_update_secret(owner, repo, secret_name, secret_value, token):
+    headers = {
+        'Authorization': f'token {token}',
+        'Accept': 'application/vnd.github.v3+json'
+    }
+    url = f'https://api.github.com/repos/{owner}/{repo}/actions/secrets/{secret_name}'
+    payload = {
+        'encrypted_value': secret_value,
+        'key_id': None
+    }
+    response = requests.put(url, headers=headers, json=payload)
+    return response.status_code
+
 # Main function
 def main():
     # Source repository details
@@ -57,6 +80,19 @@ def main():
 
     # Push local repository to new repository
     push_to_new_repo(source_repo_details['clone_url'], new_repo['clone_url'])
+
+    # Fetch secrets from source repository
+    secrets = get_repository_secrets(source_owner, source_repo, source_token)
+
+    # Create or update secrets in destination repository
+    for secret in secrets['secrets']:
+        secret_name = secret['name']
+        secret_value = secret['encrypted_value']
+        status_code = create_or_update_secret(dest_owner, dest_repo, secret_name, secret_value, dest_token)
+        if status_code == 200:
+            print(f'Secret "{secret_name}" migrated successfully.')
+        else:
+            print(f'Failed to migrate secret "{secret_name}".')
 
 if __name__ == "__main__":
     main()
